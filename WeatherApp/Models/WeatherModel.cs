@@ -10,7 +10,8 @@ namespace WeatherApp.Models
         public string CurrentTemperature { get; set; }
         public string HighTemperature { get; set; }
         public string LowTemperature { get; set; }
-        public string Sky { get; set; }
+        public string Weather { get; set; }
         public string WindSpeed { get; set; }
+        public string Station { get; set; }
     }
 }

@@ -35,8 +35,9 @@ namespace WeatherApp.Controllers
             model.CurrentTemperature = weatherResult.main.temp.ToString();
             model.LowTemperature = weatherResult.main.temp_min.ToString();
             model.HighTemperature = weatherResult.main.temp_max.ToString();
-            model.Sky = weatherResult.weather[0].description;
+            model.Weather = weatherResult.weather[0].description;
             model.WindSpeed = weatherResult.wind.speed.ToString();
+            model.Station = weatherResult.name;
 
             return model;
         }
