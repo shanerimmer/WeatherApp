@@ -1,0 +1,14 @@
+﻿<h1>Get current weather</h1>
+<label for="zip">Zip Code</label>
+<input type="number" id="zip" [(ngModel)]="zipcode" />
+<input type="button" value="Get Weather" (click)="getCurrentWeather(zipcode)" />
+
+<div *ngIf="weather; else showError">
+    <hr />
+    <p>The {{weather.station}} station is reporting that the current temperature is {{weather.currentTemperature}}&#176;</p>
+    <p>The high for the day is {{weather.highTemperature}}&#176; and the low is {{weather.lowTemperature}}&#176;</p>
+    <p>The current weather is: {{weather.weather}}</p>
+</div>
+<ng-template #showError>
+    <p>{{error.error}}</p>
+</ng-template>

@@ -22,22 +22,30 @@ namespace WeatherApp.Controllers
         [HttpGet("{zip}", Name = "Get")]
         public WeatherModel Get(string zip)
         {
+            WeatherModel model = new WeatherModel();
             string url = string.Format("http://api.openweathermap.org/data/2.5/weather?zip={0},us&appid={1}&units=imperial", zip, APIKey);
 
-            WebRequest request = WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream responseStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream);
+            try
+            {
+                WebRequest request = WebRequest.Create(url);
+                WebResponse response = request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream);
 
-            WeatherResult weatherResult = JsonConvert.DeserializeObject(reader.ReadToEnd(), typeof(WeatherResult)) as WeatherResult;
+                WeatherResult weatherResult = JsonConvert.DeserializeObject(reader.ReadToEnd(), typeof(WeatherResult)) as WeatherResult;
 
-            WeatherModel model = new WeatherModel();
-            model.CurrentTemperature = weatherResult.main.temp.ToString();
-            model.LowTemperature = weatherResult.main.temp_min.ToString();
-            model.HighTemperature = weatherResult.main.temp_max.ToString();
-            model.Weather = weatherResult.weather[0].description;
-            model.WindSpeed = weatherResult.wind.speed.ToString();
-            model.Station = weatherResult.name;
+                model.CurrentTemperature = weatherResult.main.temp.ToString();
+                model.LowTemperature = weatherResult.main.temp_min.ToString();
+                model.HighTemperature = weatherResult.main.temp_max.ToString();
+                model.Weather = weatherResult.weather[0].description;
+                model.WindSpeed = weatherResult.wind.speed.ToString();
+                model.Station = weatherResult.name;
+            }
+            catch
+            {
+                //log actual error internally
+                throw new Exception("Unable to retrieve weather data");
+            }
 
             return model;
         }
