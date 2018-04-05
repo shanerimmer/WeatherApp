@@ -16,7 +16,6 @@ export class WeatherComponent {
     public getCurrentWeather(zipcode: string) {
         this.http.get('/api/weather/' + zipcode).subscribe(
             data => {
-                this.error = new ErrorObservable('');
                 this.weather = data.json();
             },
             error => {

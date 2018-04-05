@@ -49,6 +49,9 @@ namespace WeatherApp.External
         public int all { get; set; }
     }
 
+    /// <summary>
+    /// Generated from OpenWeatherMap's JSON... yuck
+    /// </summary>
     public class WeatherResult
     {
         public Coord coord { get; set; }
